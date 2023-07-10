@@ -3,6 +3,7 @@ import Main from "../layouts/Main";
 import Categories from "../Components/Categories/Categories";
 import Login from "../Components/Login/Login";
 import SignUp from "../Components/Signup/Signup";
+import Home from "../layouts/Home";
 
 export const router = createBrowserRouter([
   {
@@ -11,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Categories></Categories>,
+        element: <Home></Home>
       },
     ],
   },
