@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/effect-creative";
 
 
-import { EffectCreative } from "swiper/modules";
+import { EffectCreative, Autoplay } from "swiper/modules";
 
 const Card = ({ room }) => {
   const { image, image1, image2 } = room;
@@ -23,6 +23,10 @@ const Card = ({ room }) => {
           <Swiper
             grabCursor={true}
             effect={"creative"}
+            autoplay={{
+                delay: 1500,
+                disableOnInteraction: false,
+              }}
             creativeEffect={{
               prev: {
                 shadow: true,
@@ -32,7 +36,7 @@ const Card = ({ room }) => {
                 translate: ["100%", 0, 0],
               },
             }}
-            modules={[EffectCreative]}
+            modules={[Autoplay,EffectCreative]}
             className="mySwiper3 w-full h-full"
           >
             <SwiperSlide className="w-full h-full">
@@ -68,6 +72,30 @@ const Card = ({ room }) => {
                 transition
               "
                   src={image1}
+                  alt="Room"
+                />
+                <div
+                  className="
+              absolute
+              top-3
+              right-3
+            "
+                >
+                  <HeartButton />
+                </div>
+              </SwiperSlide>
+            }
+            {
+                image2 && <SwiperSlide>
+                <img
+                  className="
+                object-cover 
+                h-full 
+                w-full 
+                group-hover:scale-110 
+                transition
+              "
+                  src={image2}
                   alt="Room"
                 />
                 <div

@@ -4,6 +4,7 @@ import { categories } from "./Categoriesdata";
 import CategoryBox from "./CategoryBox";
 import Rooms from "../Rooms/Rooms";
 const Categories = () => {
+  
   return <Container>
     <div className="flex flex-row justify-between gap-5 overflow-x-auto cursor-pointer">
         {
