@@ -3,6 +3,7 @@ import Container from "../Shared/Container/Container";
 import Card from "./Card";
 import Loader from "../Loader/Loader";
 import { useSearchParams } from "react-router-dom";
+import Heading from "../Shared/Heading/Heading";
 
 const Rooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -35,10 +36,11 @@ const Rooms = () => {
   return (
     <Container>
       {rooms.length == 0 && (
-        <div className="grid justify-center mt-12">
-          <p className="font-bold text-xl">No Rooms Available In This Category !</p>
-          <p className="text-gray-400 mx-auto">Please Select Another Category </p>
-        </div>
+        <Heading className="" title={'No Rooms Available In This Category !'} subtitle={'Please Select Another Category'} center={'true'}></Heading>
+        // <div className="grid justify-center mt-12">
+        //   <p className="font-bold text-xl">No Rooms Available In This Category !</p>
+        //   <p className="text-gray-400 mx-auto">Please Select Another Category </p>
+        // </div>
       )}
       {loading && <Loader></Loader>}
      
