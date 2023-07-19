@@ -5,13 +5,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
+import { saveUser } from "../../api/saveUser";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location?.state?.pathname || '/';
-  
+  const from = location?.state?.pathname || "/";
+
   const {
     loading,
     setLoading,
@@ -19,6 +20,23 @@ const SignUp = () => {
     signInWithGoogle,
     updateUserProfile,
   } = useContext(AuthContext);
+
+  const handelGoogleRegister = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+
+        saveUser(user);
+        navigate("/");
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(error.message);
+        setLoading(false);
+      });
+  };
+
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -43,21 +61,22 @@ const SignUp = () => {
       .then((data) => {
         const photoURL = data?.data?.display_url;
         console.log(photoURL);
-        createUser(email,password).then(result=>{
-          const user = result.user;
-          updateUserProfile(name,photoURL)
-          navigate(from, {replace: true})
-          console.log(location)
-          toast.success('User Created Successfully ')
-          setLoading(false)
-        }).catch(error=>{
-          console.log(error)
-          toast.error(error.message)
-          setLoading(false)
-        })
+        createUser(email, password)
+          .then((result) => {
+            const user = result.user;
+            updateUserProfile(name, photoURL);
+            saveUser(user);
+            navigate(from, { replace: true });
+            console.log(location);
+            toast.success("User Created Successfully ");
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error(error.message);
+            setLoading(false);
+          });
       });
-
-    
 
     console.log(name, image);
   };
@@ -154,7 +173,10 @@ const SignUp = () => {
           </p>
           <div className="flex-1 h-px sm:w-16 dark:bg-gray-700"></div>
         </div>
-        <div className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer">
+        <div
+          onClick={handelGoogleRegister}
+          className="flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer"
+        >
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
