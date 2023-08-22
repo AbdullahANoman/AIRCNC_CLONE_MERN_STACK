@@ -60,7 +60,6 @@ const SignUp = () => {
       .then((res) => res.json())
       .then((data) => {
         const photoURL = data?.data?.display_url;
-        console.log(photoURL);
         createUser(email, password)
           .then((result) => {
             const user = result.user;

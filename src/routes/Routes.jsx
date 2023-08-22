@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../layouts/Main";
 import Categories from "../Components/Categories/Categories";
 import Login from "../Components/Login/Login";
-import SignUp from "../Components/Signup/Signup";
 import Home from "../layouts/Home";
 
 import PrivateRoute from "./PrivateRoute";
 import RoomDetails from "../Components/Rooms/RoomDetails";
-import DashboardLayout from "../layouts/dashboardLayout";
 import AddRoom from "../Components/Dashboard/AddRoom";
+import SignUp from "../Components/Signup/SignUp";
+import DashboardLayout from "../layouts/DashboardLayout";
 
 export const router = createBrowserRouter([
   {

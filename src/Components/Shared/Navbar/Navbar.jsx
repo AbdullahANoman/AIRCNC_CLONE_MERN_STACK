@@ -3,7 +3,7 @@ import Container from "../Container/Container";
 import logo from "../../../assets/images/logo.png";
 import { Link } from "react-router-dom";
 import Search from "./Search";
-import MenuDropdown from "./MenuDropDown";
+import MenuDropdown from "./MenuDropdown";
 const Navbar = () => {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
