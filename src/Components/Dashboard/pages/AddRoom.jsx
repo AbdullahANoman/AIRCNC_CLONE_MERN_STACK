@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
-import AddRoomForm from "../Forms/AddRoomForm";
-import { handleImageUpload } from "../../api/utils";
+import AddRoomForm from "../../Forms/AddRoomForm";
+import { handleImageUpload } from "../../../api/utils";
 import { toast } from "react-hot-toast";
-import { AuthContext } from "../../providers/AuthProvider";
-import { addRoom, getRooms } from "../../api/rooms";
+import { AuthContext } from "../../../providers/AuthProvider";
+import { addRoom, getRooms } from "../../../api/rooms";
 
 const AddRoom = () => {
   const { user } = useContext(AuthContext);

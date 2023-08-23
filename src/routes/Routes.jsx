@@ -6,12 +6,13 @@ import Home from "../layouts/Home";
 
 import PrivateRoute from "./PrivateRoute";
 import RoomDetails from "../Components/Rooms/RoomDetails";
-import AddRoom from "../Components/Dashboard/AddRoom";
+import AddRoom from "../Components/Dashboard/pages/AddRoom";
 import SignUp from "../Components/Signup/SignUp";
 import DashboardLayout from "../layouts/DashboardLayout";
 import { getRoom } from "../api/rooms";
 import { EmailAuthCredential } from "firebase/auth";
 import Update from "../Components/Update/Update";
+import MyBookings from "../Components/Dashboard/pages/MyBookings";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path : 'addRoom',
         element : <AddRoom></AddRoom>
+      },
+      {
+        path: 'myBookings',
+        element: <MyBookings></MyBookings>
       }
     ]
   },

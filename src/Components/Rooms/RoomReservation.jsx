@@ -4,10 +4,14 @@ import Button from "../Button/Button.jsx";
 import { AuthContext } from "../../providers/AuthProvider.jsx";
 import BookingModal from "../Modal/BookingModal.jsx";
 import { formatDistance } from "date-fns";
+import { makeBookings, updateRoomBooked } from "../../api/bookings.js";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const RoomReservation = ({ room }) => {
+  const navigate = useNavigate()
   const { user, role } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
-  const { price, host, from, to, location,title } = room || {};
+  const { _id, price, host, from, to, location, title, booked,imageUrl } = room || {};
   const { email, name } = host || {};
   const [value, setValue] = useState({
     startDate: new Date(from),
@@ -28,22 +32,38 @@ const RoomReservation = ({ room }) => {
     price: totalPrice,
     to: value?.endDate,
     from: value?.startDate,
-    title
+    title,
+    roomId : _id,
+    image : imageUrl
   });
 
   const modalHandler = () => {
-    console.log("I am Modal handler");
-    setIsOpen(true);
+    console.log("noman");
+    makeBookings(bookingInfo)
+      .then((res) => {
+        if (res.insertedId) {
+          updateRoomBooked(_id,true).then((res) => {
+            console.log(res);
+            toast.success("Successfully Booking Done");
+            navigate('/dashboard/myBookings')
+            closeModal();
+          }).catch(err=>{
+            toast.err('Problem in booked')
+          })
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   const closeModal = () => {
     setIsOpen(false);
   };
 
-  const handleSelect = (ranges) =>{
-    setValue({...value})
-  }
-
+  const handleSelect = (ranges) => {
+    setValue({ ...value });
+  };
 
   return (
     <>
@@ -60,7 +80,7 @@ const RoomReservation = ({ room }) => {
         <div>
           <Button
             onClick={() => setIsOpen(true)}
-            disabled={user?.email == email}
+            disabled={user?.email == email || booked == true}
             label={"Reserve"}
           ></Button>
         </div>
