@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { toast } from "react-hot-toast";
 import { TbFidgetSpinner } from "react-icons/tb";
-import { saveUser } from "../../api/saveUser";
+import { saveUser } from "../../api/auth";
 
 const SignUp = () => {
   const navigate = useNavigate();

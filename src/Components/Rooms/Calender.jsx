@@ -1,17 +1,20 @@
-import { DateRange } from 'react-date-range'
+import { DateRange } from "react-date-range";
 
-
-
-const DatePicker = () => {
+const DatePicker = ({ value,handleSelect }) => {
   return (
-    <DateRange 
-      rangeColors={['#262626']}
-      date={new Date()}
-      direction='vertical'
-      showDateDisplay={false}
-      minDate={new Date()}
-    />
-  )
-}
+    <div className="flex justify-center ">
+      <DateRange
+        ranges={[value]}
+        rangeColors={["#F43F5E"]}
+        date={new Date()}
+        direction="vertical"
+        showDateDisplay={false}
+        minDate={value.startDate}
+        onChange={handleSelect}
+        maxDate={value.endDate}
+      />
+    </div>
+  );
+};
 
-export default DatePicker
+export default DatePicker;

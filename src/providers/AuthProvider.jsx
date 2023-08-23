@@ -11,6 +11,7 @@ import {
   updateProfile,
 } from 'firebase/auth'
 import { app } from '../firebase/firebase.config'
+import { checkHost } from '../api/auth'
 
 export const AuthContext = createContext(null)
 
@@ -19,7 +20,14 @@ const googleProvider = new GoogleAuthProvider()
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null)
+  const [role,setRole] = useState(null)
   const [loading, setLoading] = useState(true)
+
+  useEffect(()=>{
+    if(user){
+      checkHost(user?.email).then(res=>setRole(res))
+    }
+  },[user])
 
   const createUser = (email, password) => {
     setLoading(true)
@@ -56,7 +64,6 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setUser(currentUser)
-      console.log('current user', currentUser)
       setLoading(false)
     })
     return () => {
@@ -67,6 +74,8 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     loading,
+    role,
+    setRole,
     setLoading,
     createUser,
     signIn,

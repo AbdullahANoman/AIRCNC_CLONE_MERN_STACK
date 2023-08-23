@@ -3,14 +3,15 @@ import AddRoomForm from "../Forms/AddRoomForm";
 import { handleImageUpload } from "../../api/utils";
 import { toast } from "react-hot-toast";
 import { AuthContext } from "../../providers/AuthProvider";
+import { addRoom, getRooms } from "../../api/rooms";
 
 const AddRoom = () => {
   const { user } = useContext(AuthContext);
-  const [dates,setDates] = useState({
+  const [dates, setDates] = useState({
     startDate: new Date(),
     endDate: new Date(),
-    key: 'selection',
-  })
+    key: "selection",
+  });
   const [loading, setLoading] = useState(false);
   const [uploadButtonText, setUploadButtonText] = useState("Upload Image");
 
@@ -28,8 +29,8 @@ const AddRoom = () => {
     const bathrooms = form.bathrooms.value;
     const description = form.description.value;
 
-    const from = dates.startDate ;
-    const to = dates.endDate ;
+    const from = dates.startDate;
+    const to = dates.endDate;
 
     const image = form.image.files[0];
 
@@ -51,17 +52,29 @@ const AddRoom = () => {
           from,
           host: {
             name: user?.displayName,
-            photoUrl : user?.photoURL,
-            email : user?.email
+            photoUrl: user?.photoURL,
+            email: user?.email,
           },
         };
-        console.log(allData);
+        // console.log(allData);
+        //postRoom in database
+        addRoom(allData)
+          .then((res) => {
+            if (res?.insertedId) {
+              toast.success('Room Added Successfully')
+
+            }
+          })
+          .catch((err) => toast.error(err.message));
         setLoading(false);
       })
       .catch((err) => {
         toast.error(err.message);
         setLoading(false);
       });
+
+
+      
     //ImageBB Image Hoisting
     // const formData = new FormData();
     // formData.append("image", image);
@@ -86,14 +99,14 @@ const AddRoom = () => {
     //       setLoading(false);
     // })
   };
-
+  getRooms().then(res=>console.log(res)).catch(err=>toast.error(err.message))
   const handleImageChange = (image) => {
     setUploadButtonText(image?.name);
   };
 
-  const handleDates = ranges =>{
-    setDates(ranges.selection)
-  }
+  const handleDates = (ranges) => {
+    setDates(ranges.selection);
+  };
   return (
     <AddRoomForm
       handleSubmit={handleSubmit}

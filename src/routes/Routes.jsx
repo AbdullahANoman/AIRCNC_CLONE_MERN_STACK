@@ -9,6 +9,9 @@ import RoomDetails from "../Components/Rooms/RoomDetails";
 import AddRoom from "../Components/Dashboard/AddRoom";
 import SignUp from "../Components/Signup/SignUp";
 import DashboardLayout from "../layouts/DashboardLayout";
+import { getRoom } from "../api/rooms";
+import { EmailAuthCredential } from "firebase/auth";
+import Update from "../Components/Update/Update";
 
 export const router = createBrowserRouter([
   {
@@ -20,8 +23,9 @@ export const router = createBrowserRouter([
         element: <Home></Home>
       },
       {
-        path: "/room/:id",
-        element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>
+        path: "/rooms/:id",
+        element: <PrivateRoute><RoomDetails></RoomDetails></PrivateRoute>,
+        loader : ({params}) => getRoom(params.id)
       },
     ],
   },
@@ -42,5 +46,9 @@ export const router = createBrowserRouter([
         element : <AddRoom></AddRoom>
       }
     ]
+  },
+  {
+    path:"/update",
+    element : <Update></Update>
   }
 ]);

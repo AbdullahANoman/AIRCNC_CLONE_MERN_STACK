@@ -1,17 +1,18 @@
 import React from "react";
 import Heading from "../Shared/Heading/Heading";
 
-const Header = () => {
+const Header = ({room}) => {
+  const {title,location,imageUrl}  = room
   return (
     <>
       <Heading
-        title={"Floating Mountain Villa"}
-        subtitle={"Sideman , Indonesia"}
+        title={title}
+        subtitle={location}
       ></Heading>
       <div className="flex w-full md:h-[40vh] rounded-2xl mt-5 overflow-hidden">
         <img
           className="w-full object-cover"
-          src="https://a0.muscache.com/im/pictures/a71562ca-bb0e-425d-b33f-e397617159e8.jpg?im_w=1200"
+          src={imageUrl}
           alt="hotel image"
         />
       </div>

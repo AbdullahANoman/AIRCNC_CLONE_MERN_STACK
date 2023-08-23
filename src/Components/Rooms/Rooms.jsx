@@ -11,12 +11,11 @@ const Rooms = () => {
 
   const [params, setParams] = useSearchParams();
   const value = params.get("category");
-  console.log(value);
 
   
   useEffect(() => {
     setLoading(true);
-    fetch("rooms.json")
+    fetch(`${import.meta.env.VITE_API_URL}/rooms`)
       .then((res) => res.json())
       .then((data) => {
         if(value){
@@ -32,7 +31,6 @@ const Rooms = () => {
       });
   }, [value]);
 
-  console.log(rooms);
   return (
     <Container>
       {rooms.length == 0 && (
