@@ -13,6 +13,7 @@ import { getRoom } from "../api/rooms";
 import { EmailAuthCredential } from "firebase/auth";
 import Update from "../Components/Update/Update";
 import MyBookings from "../Components/Dashboard/pages/MyBookings";
+import MyListings from "../Components/Dashboard/pages/MyListings";
 
 export const router = createBrowserRouter([
   {
@@ -43,12 +44,16 @@ export const router = createBrowserRouter([
     element : <DashboardLayout></DashboardLayout>,
     children : [
       {
-        path : 'addRoom',
+        path : 'add-room',
         element : <AddRoom></AddRoom>
       },
       {
-        path: 'myBookings',
+        path: 'my-bookings',
         element: <MyBookings></MyBookings>
+      },
+      {
+        path: 'my-listings',
+        element : <MyListings/>
       }
     ]
   },

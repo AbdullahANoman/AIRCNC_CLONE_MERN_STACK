@@ -23,3 +23,13 @@ export const getRoom = async (id) =>{
     const data = await res.json()
     return data
 }
+
+//checkMyListing which rooms was I am added 
+
+export const getMyRooms = async email =>{
+    const url = `${import.meta.env.VITE_API_URL}/getMyAddedRooms/${email}`
+
+    const res = await fetch(url)
+    const data = await res.json()
+    return data
+}

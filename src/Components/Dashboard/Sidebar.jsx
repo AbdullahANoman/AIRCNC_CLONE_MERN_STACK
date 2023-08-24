@@ -6,10 +6,12 @@ import { AiOutlineBars } from "react-icons/ai";
 import { AuthContext } from "../../providers/AuthProvider";
 import { BsFillHouseAddFill } from "react-icons/bs";
 import Logo from "../Shared/Logo/Logo";
+import GuestMenu from "./GuestMenu";
+import HostMenu from "./HostMenu";
 const Sidebar = () => {
   const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
-  const { user, logOut, loading } = useContext(AuthContext);
+  const { user, logOut, loading,role } = useContext(AuthContext);
 
   const [isActive, setActive] = useState("false");
   const toggleHandler = (event) => {
@@ -83,7 +85,7 @@ const Sidebar = () => {
           <div className="flex flex-col justify-between flex-1 mt-6">
             <nav>
               <>
-                <label
+                {role && role=="host"? <label
                   htmlFor="Toggle3"
                   className="inline-flex w-full justify-center items-center px-2 rounded-md cursor-pointer text-gray-800"
                 >
@@ -99,9 +101,11 @@ const Sidebar = () => {
                   <span className="px-4 py-1 rounded-r-md bg-gray-300 peer-checked:bg-rose-400">
                     Host
                   </span>
-                </label>
+                </label> : ""}
+                {toggle ? <HostMenu></HostMenu> :  <GuestMenu></GuestMenu> }
+                
                 {/* Menu Links */}
-                <NavLink
+                {/* <NavLink
                   to="/dashboard/addRoom"
                   className={({ isActive }) =>
                     `flex items-center px-4 py-2 mt-5  transition-colors duration-300 transform  hover:bg-gray-300   hover:text-gray-700 ${
@@ -124,7 +128,7 @@ const Sidebar = () => {
                   <BsFillHouseAddFill className="w-5 h-5" />
 
                   <span className="mx-4 font-medium">My Bookings</span>
-                </NavLink>
+                </NavLink> */}
               </>
             </nav>
           </div>

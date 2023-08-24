@@ -67,7 +67,7 @@ const MyBookings = () => {
                 <tbody>
                     {
                         bookRooms.map((bookRoom)=>(
-                            <TableRow key={bookRoom?.id} booking={bookRoom}></TableRow>
+                            <TableRow key={bookRoom?._id} booking={bookRoom} findBooking={findBooking}></TableRow>
                         ))
                     }
                 </tbody>
