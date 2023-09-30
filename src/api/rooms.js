@@ -33,3 +33,16 @@ export const getMyRooms = async email =>{
     const data = await res.json()
     return data
 }
+
+
+//myListing my rooms delete singleRoom 
+
+export const deleteListedRoom = async id =>{
+    const url = `${import.meta.env.VITE_API_URL}/deleteSingleRoom/${id}`
+
+    const res = await fetch(url,{
+        method: 'DELETE'
+    })
+    const data = await res.json()
+    return data
+}

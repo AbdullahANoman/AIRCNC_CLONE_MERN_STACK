@@ -7,11 +7,9 @@ import TableRow from "../TableRow";
 const MyBookings = () => {
     const [bookRooms,setBookRooms] = useState([]);
     const {user} = useContext(AuthContext)
-   
+    const fetchRooms = findBooking(user?.email).then(data=>setBookRooms(data)).catch(error=>{toast.error(error.message)})
     useEffect(()=>{
-        findBooking(user?.email).then(data=>setBookRooms(data)).catch(err=>{
-            toast.error(err.message)
-        })
+       fetchRooms
     },[user])
 
     console.log("bookRoom", bookRooms);
@@ -67,7 +65,7 @@ const MyBookings = () => {
                 <tbody>
                     {
                         bookRooms.map((bookRoom)=>(
-                            <TableRow key={bookRoom?._id} booking={bookRoom} findBooking={findBooking}></TableRow>
+                            <TableRow key={bookRoom?._id} booking={bookRoom} fetchRooms={fetchRooms}></TableRow>
                         ))
                     }
                 </tbody>

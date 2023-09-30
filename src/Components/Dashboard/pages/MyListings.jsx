@@ -7,11 +7,11 @@ import RoomDataRow from "../RoomDataRow";
 const MyListings = () => {
   const { user } = useContext(AuthContext);
   const [rooms, setRooms] = useState([]);
+  const fetchRooms = () => getMyRooms(user?.email).then(data => setRooms(data)).catch((error) => toast.error(error.message));
+
   useEffect(() => {
-    getMyRooms(user?.email)
-      .then((data) => setRooms(data))
-      .catch((error) => toast.error(error.message));
-  }, [user]);
+    fetchRooms()
+  }, [user])
 
   console.log(rooms);
   return (
@@ -69,7 +69,7 @@ const MyListings = () => {
               <tbody>
                 {
                     rooms.map(room=>(
-                        <RoomDataRow key={room?._id} room={room}/>
+                        <RoomDataRow key={room?._id} room={room} fetchRooms={fetchRooms}/>
                     ))
                 }
               </tbody>

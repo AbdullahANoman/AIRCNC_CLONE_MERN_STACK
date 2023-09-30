@@ -5,7 +5,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import DeleteModal from "../Modal/DeleteModal";
 
-const TableRow = ({ booking, findBooking }) => {
+const TableRow = ({ booking }) => {
   const { _id, image, from, to, price, location, title, roomId } =
     booking || {};
 
@@ -22,10 +22,10 @@ const TableRow = ({ booking, findBooking }) => {
         if (res.deletedCount > 0) {
           updateRoomBooked(roomId, false)
             .then((res) => {
-              
+            //   fetchRooms()
               toast.success("Cancel Your Bookings Successfully");
               closeModal()
-              findBooking();
+             
             })
             .catch((err) => {
               toast.error(err.message);

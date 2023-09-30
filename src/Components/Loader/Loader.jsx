@@ -1,4 +1,4 @@
-import { GridLoader } from 'react-spinners'
+import { GridLoader, SyncLoader } from 'react-spinners'
 
 const Loader = () => {
   return (

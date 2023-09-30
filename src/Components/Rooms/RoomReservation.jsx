@@ -45,7 +45,7 @@ const RoomReservation = ({ room }) => {
           updateRoomBooked(_id,true).then((res) => {
             console.log(res);
             toast.success("Successfully Booking Done");
-            navigate('/dashboard/myBookings')
+            navigate('/dashboard/my-bookings')
             closeModal();
           }).catch(err=>{
             toast.err('Problem in booked')
