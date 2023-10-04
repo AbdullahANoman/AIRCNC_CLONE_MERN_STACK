@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../providers/AuthProvider";
-import { findBooking } from "../../../api/bookings";
+import { findBooking, findHostBookings } from "../../../api/bookings";
 import { toast } from "react-hot-toast";
 import TableRow from "../TableRow";
 
-const MyBookings = () => {
+const ManageBookings = () => {
   const [bookRooms, setBookRooms] = useState([]);
   const { user } = useContext(AuthContext);
-  const fetchRooms = findBooking(user?.email)
+  const fetchRooms = findHostBookings(user?.email)
     .then((data) => setBookRooms(data))
     .catch((error) => {
       toast.error(error.message);
@@ -81,4 +81,4 @@ const MyBookings = () => {
   );
 };
 
-export default MyBookings;
+export default ManageBookings;

@@ -22,10 +22,9 @@ const TableRow = ({ booking }) => {
         if (res.deletedCount > 0) {
           updateRoomBooked(roomId, false)
             .then((res) => {
-            //   fetchRooms()
+              //   fetchRooms()
               toast.success("Cancel Your Bookings Successfully");
-              closeModal()
-             
+              closeModal();
             })
             .catch((err) => {
               toast.error(err.message);

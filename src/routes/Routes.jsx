@@ -14,6 +14,7 @@ import { EmailAuthCredential } from "firebase/auth";
 import Update from "../Components/Update/Update";
 import MyBookings from "../Components/Dashboard/pages/MyBookings";
 import MyListings from "../Components/Dashboard/pages/MyListings";
+import ManageBookings from "../Components/Dashboard/pages/ManageBookings";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
       {
         path: 'my-listings',
         element : <MyListings/>
+      },
+      {
+        path:'manage-bookings',
+        element:<ManageBookings/>
       }
     ]
   },
