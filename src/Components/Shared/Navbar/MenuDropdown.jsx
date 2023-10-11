@@ -7,7 +7,7 @@ import HostModal from "../../Modal/HostRequestModal";
 import { checkHost, updateToHost } from "../../../api/auth";
 import { toast } from "react-hot-toast";
 
-const MenuDropdown = () => {
+const MenuDropdown = ({setRooms}) => {
   const { user, logOut, role, setRole } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [modal, setModal] = useState(false);

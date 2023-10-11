@@ -37,25 +37,25 @@ const RoomReservation = ({ room }) => {
     image : imageUrl
   });
 
-  const modalHandler = () => {
-    console.log("noman");
-    makeBookings(bookingInfo)
-      .then((res) => {
-        if (res.insertedId) {
-          updateRoomBooked(_id,true).then((res) => {
-            console.log(res);
-            toast.success("Successfully Booking Done");
-            navigate('/dashboard/my-bookings')
-            closeModal();
-          }).catch(err=>{
-            toast.err('Problem in booked')
-          })
-        }
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
-  };
+  // const modalHandler = () => {
+  //   console.log("noman");
+  //   makeBookings(bookingInfo)
+  //     .then((res) => {
+  //       if (res.insertedId) {
+  //         updateRoomBooked(_id,true).then((res) => {
+  //           console.log(res);
+  //           toast.success("Successfully Booking Done");
+  //           navigate('/dashboard/my-bookings')
+  //           closeModal();
+  //         }).catch(err=>{
+  //           toast.err('Problem in booked')
+  //         })
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       toast.error(err.message);
+  //     });
+  // };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -93,7 +93,7 @@ const RoomReservation = ({ room }) => {
       <BookingModal
         bookingInfo={bookingInfo}
         closeModal={closeModal}
-        modalHandler={modalHandler}
+        // modalHandler={modalHandler}
         isOpen={isOpen}
       ></BookingModal>
     </>

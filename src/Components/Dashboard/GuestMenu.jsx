@@ -10,7 +10,6 @@ const GuestMenu = () => {
   const { role, setRole, user } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [modal, setModal] = useState(false);
-  console.log(modal);
   const modalHandler = (email) => {
     updateToHost(email)
       .then((res) => {

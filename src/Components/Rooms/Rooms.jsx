@@ -12,42 +12,39 @@ const Rooms = () => {
   const [params, setParams] = useSearchParams();
   const value = params.get("category");
 
-  
   useEffect(() => {
     setLoading(true);
     fetch(`${import.meta.env.VITE_API_URL}/rooms`)
       .then((res) => res.json())
       .then((data) => {
-        if(value){
-            const filteredRooms = data.filter(room=> room?.category == value )
-            setLoading(false)
-            setRooms(filteredRooms)
+        if (value) {
+          const filteredRooms = data.filter((room) => room?.category == value);
+          setLoading(false);
+          setRooms(filteredRooms);
+        } else {
+          setLoading(false);
+          setRooms(data);
         }
-        else{
-            setLoading(false);
-            setRooms(data);
-        }
-        
       });
   }, [value]);
 
   return (
     <Container>
-      {rooms.length == 0 && (
-        <Heading className="" title={'No Rooms Available In This Category !'} subtitle={'Please Select Another Category'} center={'true'}></Heading>
-        // <div className="grid justify-center mt-12">
-        //   <p className="font-bold text-xl">No Rooms Available In This Category !</p>
-        //   <p className="text-gray-400 mx-auto">Please Select Another Category </p>
-        // </div>
-      )}
-      {loading && <Loader></Loader>}
-     
+      {rooms.length == 0 ? (
+        <Heading
+          className=""
+          title={"No Rooms Available In This Category !"}
+          subtitle={"Please Select Another Category"}
+          center={"true"}
+        ></Heading>
+      ) : (
         <div className="pt-12 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
           {rooms.map((room, index) => (
             <Card room={room} key={index}></Card>
           ))}
         </div>
-     
+      )}
+      {loading && <Loader></Loader>}
     </Container>
   );
 };

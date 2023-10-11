@@ -25,7 +25,6 @@ const Sidebar = () => {
     logOut();
     navigate("/");
   };
-  console.log(user);
   return (
     <>
       {/* Small Screen Navbar */}

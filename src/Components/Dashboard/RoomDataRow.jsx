@@ -3,17 +3,19 @@ import { useState } from "react";
 import DeleteModal from "../Modal/DeleteModal";
 import { deleteListedRoom } from "../../api/rooms";
 import { toast } from "react-hot-toast";
+import UpdateModal from "../Modal/UpdateModal";
 
-const RoomDataRow = ({ room, fetchRooms }) => {
+const RoomDataRow = ({ room, refetch }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isUpdateOpen, setIsUpdateOpen] = useState(false);
 
   const modalHandler = (id) => {
-    deleteListedRoom(id,fetchRooms)
+    deleteListedRoom(id, refetch)
       .then((res) => {
-        if(res.deletedCount>0){
-            closeModal()
-            fetchRooms()
-            toast.success("Your added room was deleted")
+        if (res.deletedCount > 0) {
+          closeModal();
+          refetch();
+          toast.success("Your added room was deleted");
         }
       })
       .catch((error) => {
@@ -24,6 +26,11 @@ const RoomDataRow = ({ room, fetchRooms }) => {
     setIsOpen(false);
   };
 
+  const closeUpdateModal = () => {
+    setIsUpdateOpen(false);
+  };
+
+  console.log(isUpdateOpen);
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -70,7 +77,10 @@ const RoomDataRow = ({ room, fetchRooms }) => {
         </span>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <span className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
+        <span
+          onClick={() => setIsUpdateOpen(true)}
+          className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
+        >
           <span
             aria-hidden="true"
             className="absolute inset-0 bg-green-200 opacity-50 rounded-full"
@@ -83,8 +93,16 @@ const RoomDataRow = ({ room, fetchRooms }) => {
         closeModal={closeModal}
         isOpen={isOpen}
         id={room?._id}
-        fetchRooms={fetchRooms}
+        refetch={refetch}
       ></DeleteModal>
+
+      <UpdateModal
+        closeUpdateModal={closeUpdateModal}
+        isUpdateOpen={isUpdateOpen}
+        refetch={refetch}
+        room={room}
+        id={room?._id}
+      ></UpdateModal>
     </tr>
   );
 };

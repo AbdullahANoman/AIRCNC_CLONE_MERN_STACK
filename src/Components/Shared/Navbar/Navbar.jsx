@@ -8,7 +8,6 @@ import logo from "../../../assets/images/logo.png";
 import MenuDropdown from "./MenuDropdown";
 const Navbar = ({ setRooms }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(isOpen);
   return (
     <div
       className={`py-4 w-full bg-white  shadow-sm ${
@@ -42,7 +41,7 @@ const Navbar = ({ setRooms }) => {
               )}
             </div>
             <div onClick={() => setIsOpen(false)}>
-              <MenuDropdown />
+              <MenuDropdown setRooms={setRooms} />
             </div>
           </div>
         </Container>
